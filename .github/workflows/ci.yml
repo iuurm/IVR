@@ -40,7 +40,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Шаг 1: Установка Railway Deploy Action (используем версию 0.1.2-beta)
       - name: Railway Deploy
         uses: bervProject/railway-deploy@0.1.2-beta
         with:
