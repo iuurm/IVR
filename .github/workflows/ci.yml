@@ -40,10 +40,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Шаг 1: Установка Railway Deploy Action
-      - name: Deploy to Railway
-        uses: railwayapp/railway-deploy@v1
+      # Шаг 1: Установка Railway Deploy Action (используем версию 0.1.2-beta)
+      - name: Railway Deploy
+        uses: bervProject/railway-deploy@0.1.2-beta
         with:
-          api_token: ${{ secrets.RAILWAY_API_TOKEN }}
-          project_id: 60103c6e-f49d-4f29-9a57-7c6206311869  # ID вашего проекта
-          service_id: 4fce0a70-1016-4db7-b68f-ea8b1c8b8474  # ID вашего сервиса
+          api_token: ${{ secrets.RAILWAY_API_TOKEN }}  # Используем секрет для API токена
+          project_id: 60103c6e-f49d-4f29-9a57-7c6206311869  # ID вашего проекта на Railway
+          service_id: 4fce0a70-1016-4db7-b68f-ea8b1c8b8474  # ID сервиса, который деплоим
+          command: 'npm run deploy'  # Команда, которую нужно выполнить для деплоя (если необходимо)
+
