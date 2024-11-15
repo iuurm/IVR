@@ -40,12 +40,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Nixpacks
-        run: curl -sSL https://nixos.org/nixpacks | sh
-
-      - name: Build and Deploy with Nixpacks
-        run: nixpacks build    
-
       # Шаг 1: Установка Railway Deploy Action (используем версию 0.1.2-beta)
       - name: Railway Deploy
         uses: bervProject/railway-deploy@0.1.2-beta
