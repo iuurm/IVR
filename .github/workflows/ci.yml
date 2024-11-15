@@ -26,9 +26,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirments.txt
+
       - name: Run unit tests
         run: |
           pytest tests/
+
   deploy:
     name: Deploy to Railway
     runs-on: ubuntu-latest
@@ -47,6 +49,17 @@ jobs:
       - name: Set Railway API Token
         run: echo "RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}" >> $GITHUB_ENV
 
-      # Шаг 5: Выполнение команды Railway (например, деплой или миграция)
-      - name: Run Railway Command
-        run: railway run "npm run deploy"   
+      # Шаг 4: Авторизация в Railway CLI
+      - name: Authenticate with Railway
+        run: |
+          export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
+          railway login --token $RAILWAY_API_TOKEN --no-input
+
+      # Шаг 5: Связать проект с Railway (если это необходимо)
+      - name: Link Railway Project
+        run: |
+          railway link --project 60103c6e-f49d-4f29-9a57-7c6206311869 --service 4fce0a70-1016-4db7-b68f-ea8b1c8b8474 --no-input
+
+      # Шаг 6: Выполнение команды Railway для деплоя
+      - name: Run Railway Command (Deploy)
+        run: railway up --no-input
