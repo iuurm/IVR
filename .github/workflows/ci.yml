@@ -40,19 +40,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Railway CLI
-        run: |
-          curl -fsSL https://railway.app/install.sh | sh
-          export PATH="$HOME/.railway/bin:$PATH"
-
-      # Связать проект с Railway
-      - name: Link Railway Project
-        run: |
-          export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
-          railway link --project 60103c6e-f49d-4f29-9a57-7c6206311869 --service 4fce0a70-1016-4db7-b68f-ea8b1c8b8474
-
-      # Выполнение деплоя
-      - name: Run Railway Command (Deploy)
-        run: |
-          export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
-          railway up
+      # Шаг 1: Установка Railway Deploy Action
+      - name: Deploy to Railway
+        uses: railwayapp/railway-deploy@v1
+        with:
+          api_token: ${{ secrets.RAILWAY_API_TOKEN }}
+          project_id: 60103c6e-f49d-4f29-9a57-7c6206311869  # ID вашего проекта
+          service_id: 4fce0a70-1016-4db7-b68f-ea8b1c8b8474  # ID вашего сервиса
