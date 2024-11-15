@@ -44,5 +44,5 @@ jobs:
       - name: Railway Deploy
         uses: bervProject/railway-deploy@0.1.2-beta
         with:
-          railway_token: ${{ secrets.RAILWAY_API_TOKEN }}  # Используем секрет для API токена
+          railway_token: '94750cf0-63fd-4cb9-ac0c-cf86f1eca470'
           service: '4fce0a70-1016-4db7-b68f-ea8b1c8b8474' 
