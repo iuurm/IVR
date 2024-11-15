@@ -47,18 +47,11 @@ jobs:
       - name: Set Railway API Token
         run: echo "RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}" >> $GITHUB_ENV
 
-      # Шаг 4: Инициализация проекта (если это необходимо)
-      - name: Initialize Railway Project
-        run: |
-          export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
-          railway init
-
-      # Шаг 5: Авторизация с использованием токена
       - name: Railway Link (Authenticate)
         run: |
           export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
-          railway link
+          railway link --token $RAILWAY_API_TOKEN --no-input
 
-      # Шаг 6: Выполнение команды Railway
+      # Шаг 5: Выполнение команды Railway (например, деплой или миграция)
       - name: Run Railway Command
-        run: railway run "npm run deploy"  
+        run: railway run "npm run deploy"   
