@@ -47,11 +47,6 @@ jobs:
       - name: Set Railway API Token
         run: echo "RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}" >> $GITHUB_ENV
 
-      - name: Railway Link (Authenticate)
-        run: |
-          export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
-          railway link --token $RAILWAY_API_TOKEN --no-input
-
       # Шаг 5: Выполнение команды Railway (например, деплой или миграция)
       - name: Run Railway Command
         run: railway run "npm run deploy"   
