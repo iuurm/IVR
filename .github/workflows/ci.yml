@@ -45,21 +45,21 @@ jobs:
           curl -fsSL https://railway.app/install.sh | sh
           export PATH="$HOME/.railway/bin:$PATH"
 
-      # Шаг 3: Установка Railway API токена
+      # Установка Railway API токена в переменные окружения
       - name: Set Railway API Token
         run: echo "RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}" >> $GITHUB_ENV
 
-      # Шаг 4: Авторизация в Railway CLI
+      # Авторизация с использованием токена
       - name: Authenticate with Railway
         run: |
           export RAILWAY_API_TOKEN=${{ secrets.RAILWAY_API_TOKEN }}
-          railway login --token $RAILWAY_API_TOKEN --no-input
+          railway login
 
-      # Шаг 5: Связать проект с Railway (если это необходимо)
+      # Связать проект с Railway (если это необходимо)
       - name: Link Railway Project
         run: |
           railway link --project 60103c6e-f49d-4f29-9a57-7c6206311869 --service 4fce0a70-1016-4db7-b68f-ea8b1c8b8474 --no-input
 
-      # Шаг 6: Выполнение команды Railway для деплоя
+      # Выполнение деплоя
       - name: Run Railway Command (Deploy)
         run: railway up --no-input
