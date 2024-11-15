@@ -40,9 +40,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Nixpacks
+        run: curl -sSL https://nixos.org/nixpacks | sh
+
+      - name: Build and Deploy with Nixpacks
+        run: nixpacks build    
+
       # Шаг 1: Установка Railway Deploy Action (используем версию 0.1.2-beta)
       - name: Railway Deploy
         uses: bervProject/railway-deploy@0.1.2-beta
         with:
           railway_token: ${{ secrets.RAILWAY_API_TOKEN }}  # Используем секрет для API токена
-          service: 'IVR'  # Название или ID вашего сервиса на Railway
+          service: '4fce0a70-1016-4db7-b68f-ea8b1c8b8474' 
